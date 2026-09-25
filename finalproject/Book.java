@@ -12,6 +12,7 @@ public class Book implements Serializable {
     private Employee bookRegisterer;
 
     public Book(Employee bookRegisterer, String title, String author, int publishYear, String bookId) {
+        this.bookRegisterer = bookRegisterer;
         this.bookId = bookId;
         this.title = title;
         this.author = author;

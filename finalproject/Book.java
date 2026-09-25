@@ -2,7 +2,7 @@ package ap.exercises.finalproject;
 
 import java.io.Serializable;
 
-// Book.java
+// Agent changes manually checked on this file
 public class Book implements Serializable {
 
     private String bookId;

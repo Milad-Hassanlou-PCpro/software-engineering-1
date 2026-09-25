@@ -2,7 +2,7 @@ package ap.exercises.finalproject;
 
 import java.io.Serializable;
 
-// Book.java
+// Agent changes manually checked on this file
 public class Book implements Serializable {
 
     private String bookId;
@@ -12,6 +12,7 @@ public class Book implements Serializable {
     private Employee bookRegisterer;
 
     public Book(Employee bookRegisterer, String title, String author, int publishYear, String bookId) {
+        this.bookRegisterer = bookRegisterer;
         this.bookId = bookId;
         this.title = title;
         this.author = author;

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentManager implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private List<Student> students;
     private final List<Student> blackList;
 
@@ -14,7 +17,7 @@ public class StudentManager implements Serializable {
     }
 
     public void registerStudent(String name, String studentId, String username, String password) {
-        if (isUsernameTaken(username)) {
+        if (isUsernameTaken(username, null)) {
             System.out.println("This username already exists. Please choose a different username.");
             return;
         }
@@ -32,7 +35,7 @@ public class StudentManager implements Serializable {
     }
 
     public void editStudentInformation(Student student, String username, String password) {
-        if (isUsernameTaken(username)) {
+        if (isUsernameTaken(username, student)) {
             System.out.println("This username already exists. Please choose a different username.");
             return;
         }
@@ -72,6 +75,10 @@ public class StudentManager implements Serializable {
             System.out.println("There's no student with this id.");
             return;
         }
+        if (blackList.contains(student)) {
+            System.out.println("This student is already blocked.");
+            return;
+        }
         System.out.println("Student-> " + student + " will be blocked.");
         blackList.add(student);
         System.out.println("Blocking done.");
@@ -81,6 +88,10 @@ public class StudentManager implements Serializable {
         Student student = searchById(id);
         if (student == null) {
             System.out.println("There's no student with this id.");
+            return;
+        }
+        if (!blackList.contains(student)) {
+            System.out.println("This student is not blocked.");
             return;
         }
         System.out.println("Student-> " + student + " will be unblocked.");
@@ -96,8 +107,8 @@ public class StudentManager implements Serializable {
         return count != 0;
     }
 
-    private boolean isUsernameTaken(String username) {
-        return students.stream().anyMatch(s -> s.getUsername().equals(username));
+    private boolean isUsernameTaken(String username, Student exclude) {
+        return students.stream().anyMatch(s -> s != exclude && s.getUsername().equals(username));
     }
 
     public int getStudentCount() {

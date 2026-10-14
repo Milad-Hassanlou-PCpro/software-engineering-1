@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeManager implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private final List<Employee> employees;
 
     public EmployeeManager() {

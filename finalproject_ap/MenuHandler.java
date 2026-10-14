@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MenuHandler implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private transient Scanner scanner;
     private LibrarySystem librarySystem;
     private Student currentUser;
@@ -251,7 +254,12 @@ public class MenuHandler implements Serializable {
             System.out.println("Invalid Input For End Date" + "Error Message: " + e.getMessage());
         }
 
-        if (endDate.isAfter(LocalDate.now()) && startDate.isAfter(LocalDate.now()) && endDate.isAfter(startDate)) {
+        if (startDate == null || endDate == null) {
+            System.out.println("Request failed because of invalid dates.");
+            return;
+        }
+
+        if (!startDate.isBefore(LocalDate.now()) && endDate.isAfter(startDate)) {
             librarySystem.loanBookRequest(bookId, currentUser, startDate, endDate);
         } else {
             System.out.println("Entered dates are not valid!");
@@ -340,7 +348,7 @@ public class MenuHandler implements Serializable {
                     handleEmployeePasswordChange();
                     break;
                 case 2:
-                    handleAddNewBooK();
+                    handleAddNewBook();
                     break;
                 case 3:
                     handleEditingBook();
@@ -377,7 +385,7 @@ public class MenuHandler implements Serializable {
         librarySystem.employeePasswordChanging(currentEmployee, password);
     }
 
-    private void handleAddNewBooK() {
+    private void handleAddNewBook() {
         System.out.println("\n--- Adding Book To Library ---");
 
         System.out.print("Book Id:");
@@ -390,8 +398,7 @@ public class MenuHandler implements Serializable {
         String author = scanner.nextLine().trim();
 
         System.out.print("Publish Year:");
-        int publishYear = scanner.nextInt();
-        scanner.nextLine();
+        int publishYear = getIntInput(0, Integer.MAX_VALUE);
 
         librarySystem.addNewBook(currentEmployee, bookId, title, author, publishYear);
     }

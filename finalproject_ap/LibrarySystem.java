@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 // LibrarySystem.java
 public class LibrarySystem implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private MenuHandler menuHandler;
     private StudentManager studentManager;
     private LoanBookManager loanBookManager;
@@ -90,7 +93,7 @@ public class LibrarySystem implements Serializable {
     public void loanBookRequest(String bookId, Student student, LocalDate startDate, LocalDate endDate) {
         Book targetBook = bookManager.searchBookById(bookId);
         if (targetBook == null) {
-            System.out.println("Request failed. A book with ID : " + bookId + "do not exist.");
+            System.out.println("Request failed. A book with ID : " + bookId + " do not exist.");
         } else {
             if (loanBookManager.isABookAvailable(targetBook)) {
                 loanRequestManager.addLoanRequest(targetBook, student, startDate, endDate);
@@ -105,8 +108,9 @@ public class LibrarySystem implements Serializable {
     }
 
     public void convertRequestToAcceptedLoan(Employee giverEmployee, LoanRequest request) {
-        loanBookManager.addLoan(giverEmployee, request);
-        loanRequestManager.deleteRequest(request);
+        if (loanBookManager.addLoan(giverEmployee, request)) {
+            loanRequestManager.deleteRequest(request);
+        }
     }
 
     public void displayStudentStatistics(String id) {

@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class LoanRequest implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private Student student;
     private Book book;
     private LocalDate startDate;

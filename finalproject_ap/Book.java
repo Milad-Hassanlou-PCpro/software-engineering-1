@@ -5,6 +5,8 @@ import java.io.Serializable;
 // Book.java
 public class Book implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private String bookId;
     private String title;
     private String author;
@@ -12,6 +14,7 @@ public class Book implements Serializable {
     private Employee bookRegisterer;
 
     public Book(Employee bookRegisterer, String title, String author, int publishYear, String bookId) {
+        this.bookRegisterer = bookRegisterer;
         this.bookId = bookId;
         this.title = title;
         this.author = author;
@@ -71,7 +74,7 @@ public class Book implements Serializable {
             return false;
         }
         Book book = (Book) obj;
-        return (this.title.equalsIgnoreCase(book.title) && this.author.equalsIgnoreCase(book.title)
+        return (this.title.equalsIgnoreCase(book.title) && this.author.equalsIgnoreCase(book.author)
                 && this.bookId.equals(book.bookId) && this.publishYear == book.publishYear);
     }
 }

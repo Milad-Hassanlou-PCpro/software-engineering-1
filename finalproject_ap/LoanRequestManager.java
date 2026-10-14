@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LoanRequestManager implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private List<LoanRequest> requests;
 
     public LoanRequestManager() {

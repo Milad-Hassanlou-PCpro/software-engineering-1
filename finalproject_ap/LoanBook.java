@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class LoanBook implements Serializable, Loanable {
+
+    private static final long serialVersionUID = 1L;
+
     private Student student;
     private Book book;
     private Employee giverEmployee;
@@ -61,7 +64,7 @@ public class LoanBook implements Serializable, Loanable {
         if (startDate == null || returnDate == null) {
             return 0;
         }
-        return (int) ChronoUnit.DAYS.between(startDate, returnDate) - 1;
+        return (int) ChronoUnit.DAYS.between(startDate, returnDate);
     }
 
     @Override

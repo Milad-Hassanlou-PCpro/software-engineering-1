@@ -6,16 +6,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoanBookManager implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private List<LoanBook> loans;
 
     public LoanBookManager() {
         loans = new ArrayList<>();
     }
 
-    public void addLoan(Employee giverEmployee, LoanRequest request) {
+    public boolean addLoan(Employee giverEmployee, LoanRequest request) {
+        if (!isABookAvailable(request.getBook())) {
+            System.out.println("The request can't be accepted. The book is already on loan.");
+            return false;
+        }
         LoanBook newLoanBook = new LoanBook(request, giverEmployee);
         loans.add(newLoanBook);
         System.out.println("Request successfully accepted. The book is ready for borrowing.");
+        return true;
     }
 
     public boolean isABookAvailable(Book targetBook) {
@@ -77,7 +85,8 @@ public class LoanBookManager implements Serializable {
 
     public Integer bookGottenByEmployeeCount(String employeeId) {
         return (int) loans.stream()
-                .filter(l -> l.getGetterEmployee().getUserId().equals(employeeId))
+                .filter(l -> l.getGetterEmployee() != null
+                        && l.getGetterEmployee().getUserId().equals(employeeId))
                 .count();
     }
 

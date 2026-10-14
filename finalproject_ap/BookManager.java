@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookManager implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private List<Book> books;
     private LoanBookManager loanBookManager;
 
@@ -37,10 +40,20 @@ public class BookManager implements Serializable {
     }
 
     public void searchBook(String title, String author, String publishYear) {
+        Integer year = null;
+        if (publishYear != null) {
+            try {
+                year = Integer.parseInt(publishYear);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid publish year: " + publishYear + ". Searching failed.");
+                return;
+            }
+        }
+        final Integer targetYear = year;
         books.stream()
                 .filter(b -> (title == null || b.getTitle().equalsIgnoreCase(title)))
                 .filter(b -> (author == null || b.getAuthor().equalsIgnoreCase(author)))
-                .filter(b -> (publishYear == null || b.getPublishYear() == Integer.parseInt(publishYear)))
+                .filter(b -> (targetYear == null || b.getPublishYear() == targetYear))
                 .forEach(b -> System.out.println(b + "| Available :" + loanBookManager.isABookAvailable(b)));
     }
 
@@ -75,7 +88,11 @@ public class BookManager implements Serializable {
             }
 
             if (publishYear != null) {
-                targetBook.setPublishYear(Integer.parseInt(publishYear));
+                try {
+                    targetBook.setPublishYear(Integer.parseInt(publishYear));
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid publish year: " + publishYear + ". Publish year was not changed.");
+                }
             }
 
             System.out.println("Information of the book successfully changed.");
@@ -90,7 +107,8 @@ public class BookManager implements Serializable {
 
     public int bookSignedByEmployeeCount(String employeeId) {
         return (int) books.stream()
-                .filter(b -> b.getBookRegisterer().getUserId().equals(employeeId))
+                .filter(b -> b.getBookRegisterer() != null
+                        && b.getBookRegisterer().getUserId().equals(employeeId))
                 .count();
     }
 

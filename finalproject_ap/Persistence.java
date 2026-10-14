@@ -3,6 +3,9 @@ package ap.exercises.finalproject_ap;
 import java.io.*;
 
 public class Persistence implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private final String savePath = "datafile.bin";
 
     public void save(LibrarySystem librarySystem) {
@@ -12,12 +15,13 @@ public class Persistence implements Serializable {
             writeObj.writeObject(librarySystem);
             System.out.println("Saving completed.");
         } catch (Exception e) {
+            System.out.println("Saving failed!");
             e.printStackTrace();
         }
     }
 
     public LibrarySystem load() {
-        LibrarySystem result = null;
+        LibrarySystem result;
 
         File file = new File(savePath);
         if (!file.exists()) {
@@ -29,7 +33,9 @@ public class Persistence implements Serializable {
                 result = (LibrarySystem) readObj.readObject();
                 System.out.println("Loading completed.");
             } catch (Exception e) {
+                System.out.println("Loading saved data failed. A new empty library will be started.");
                 e.printStackTrace();
+                result = new LibrarySystem();
             }
         }
         return result;

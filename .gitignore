@@ -19,6 +19,14 @@
 *.tar.gz
 *.rar
 
+# Bundled SQLite JDBC driver must stay with the project
+!finalproject_ap/lib/*.jar
+
+# Build output / database files
+finalproject_ap/out/
+*.db
+datafile.bin
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*

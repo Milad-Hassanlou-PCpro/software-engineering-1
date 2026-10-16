@@ -115,4 +115,13 @@ public class BookManager implements Serializable {
     public int getBookCount() {
         return books.size();
     }
+
+    List<Book> getBooks() {
+        return books;
+    }
+
+    // Silent loader used by Persistence when rebuilding from the database.
+    void loadBook(Book book) {
+        books.add(book);
+    }
 }

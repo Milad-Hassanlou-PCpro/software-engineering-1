@@ -115,6 +115,23 @@ public class StudentManager implements Serializable {
         return students.size();
     }
 
+    List<Student> getStudents() {
+        return students;
+    }
+
+    List<Student> getBlackList() {
+        return blackList;
+    }
+
+    // Silent loaders used by Persistence when rebuilding from the database.
+    void loadStudent(Student student) {
+        students.add(student);
+    }
+
+    void loadBlacklistedStudent(Student student) {
+        blackList.add(student);
+    }
+
     public void displayStudentStatistics(LoanBookManager loanBookManager) {
         if (students.size() == 0) {
             System.out.println("There's not a student in list.");

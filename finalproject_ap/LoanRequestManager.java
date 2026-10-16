@@ -57,4 +57,13 @@ public class LoanRequestManager implements Serializable {
         renewList();
         return requests.size();
     }
+
+    List<LoanRequest> getRequests() {
+        return requests;
+    }
+
+    // Silent loader used by Persistence when rebuilding from the database.
+    void loadRequest(LoanRequest request) {
+        requests.add(request);
+    }
 }

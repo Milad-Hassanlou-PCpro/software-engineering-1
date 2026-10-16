@@ -46,4 +46,13 @@ public class EmployeeManager implements Serializable {
     public int getEmployeesCount(){
         return employees.size();
     }
+
+    List<Employee> getEmployees() {
+        return employees;
+    }
+
+    // Silent loader used by Persistence when rebuilding from the database.
+    void loadEmployee(Employee employee) {
+        employees.add(employee);
+    }
 }

@@ -62,6 +62,15 @@ public class LoanBookManager implements Serializable {
         return loans.size();
     }
 
+    List<LoanBook> getLoans() {
+        return loans;
+    }
+
+    // Silent loader used by Persistence when rebuilding from the database.
+    void loadLoan(LoanBook loan) {
+        loans.add(loan);
+    }
+
     public void returnBook(String bookId, Employee currentEmployee) {
         LoanBook loanBook = loans.stream()
                 .filter(l -> l.getBook().getBookId().equals(bookId))

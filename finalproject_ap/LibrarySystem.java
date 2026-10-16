@@ -30,6 +30,39 @@ public class LibrarySystem implements Serializable {
 
     }
 
+    // Used by Persistence.load() to rebuild the system from the database.
+    LibrarySystem(StudentManager studentManager, EmployeeManager employeeManager,
+                  BookManager bookManager, LoanBookManager loanBookManager,
+                  LoanRequestManager loanRequestManager) {
+        this.studentManager = studentManager;
+        this.menuHandler = new MenuHandler(this);
+        this.loanBookManager = loanBookManager;
+        this.bookManager = bookManager;
+        this.loanRequestManager = loanRequestManager;
+        this.employeeManager = employeeManager;
+        this.persistence = new Persistence();
+    }
+
+    StudentManager getStudentManager() {
+        return studentManager;
+    }
+
+    EmployeeManager getEmployeeManager() {
+        return employeeManager;
+    }
+
+    BookManager getBookManager() {
+        return bookManager;
+    }
+
+    LoanBookManager getLoanBookManager() {
+        return loanBookManager;
+    }
+
+    LoanRequestManager getLoanRequestManager() {
+        return loanRequestManager;
+    }
+
     public int getStudentCount() {
         return this.studentManager.getStudentCount();
     }

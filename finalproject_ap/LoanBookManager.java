@@ -1,13 +1,10 @@
 package ap.exercises.finalproject_ap;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoanBookManager implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class LoanBookManager {
 
     private List<LoanBook> loans;
 

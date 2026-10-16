@@ -3,16 +3,13 @@ package ap.exercises.finalproject_ap;
 
 // MenuHandler.java
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-public class MenuHandler implements Serializable {
+public class MenuHandler {
 
-    private static final long serialVersionUID = 1L;
-
-    private transient Scanner scanner;
+    private Scanner scanner;
     private LibrarySystem librarySystem;
     private Student currentUser;
     private Employee currentEmployee;

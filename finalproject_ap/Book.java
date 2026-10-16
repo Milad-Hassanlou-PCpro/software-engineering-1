@@ -1,11 +1,7 @@
 package ap.exercises.finalproject_ap;
 
-import java.io.Serializable;
-
 // Book.java
-public class Book implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Book {
 
     private String bookId;
     private String title;

@@ -1,10 +1,6 @@
 package ap.exercises.finalproject_ap;
 
-import java.io.Serializable;
-
-public class PersonParent implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class PersonParent {
 
     private final String name;
     private final String userId;

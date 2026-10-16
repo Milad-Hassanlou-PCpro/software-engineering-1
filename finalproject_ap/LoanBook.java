@@ -1,12 +1,9 @@
 package ap.exercises.finalproject_ap;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class LoanBook implements Serializable, Loanable {
-
-    private static final long serialVersionUID = 1L;
+public class LoanBook implements Loanable {
 
     private Student student;
     private Book book;

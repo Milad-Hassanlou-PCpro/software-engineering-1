@@ -1,12 +1,9 @@
 package ap.exercises.finalproject_ap;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentManager implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class StudentManager {
 
     private List<Student> students;
     private final List<Student> blackList;

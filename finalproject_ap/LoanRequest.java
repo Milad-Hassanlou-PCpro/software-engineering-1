@@ -1,11 +1,8 @@
 package ap.exercises.finalproject_ap;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
-public class LoanRequest implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class LoanRequest {
 
     private Student student;
     private Book book;
